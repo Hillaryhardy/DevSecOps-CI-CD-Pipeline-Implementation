@@ -82,9 +82,10 @@ The game implements the following rules:
    yarn dev
    ```
 
-       You should see this in your terminal
+ You should see this in your terminal.
 
 ![image](images/terminal.png)
+
 
 4. Open your browser and navigate to `http://localhost:5173`
 
