@@ -91,3 +91,15 @@ The game implements the following rules:
 
 ![image](images/localhost.png)
 
+
+## Building for Production
+
+To create a production build:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+The build artifacts will be stored in the `dist/` directory.
