@@ -50,3 +50,41 @@ The game implements the following rules:
 3. If all 9 squares are filled and no player has 3 marks in a row, the game is a draw
 4. Winning combinations are highlighted
 5. Game statistics are tracked and displayed
+
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Hillaryhardy/DevSecOps-CI-CD-Pipeline-Implementation.git
+
+   cd DevSecOps-CI-CD-Pipeline-Implementation
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+       You should see this in your terminal
+
+![image](images/terminal.png)
+
+4. Open your browser and navigate to `http://localhost:5173`
+
