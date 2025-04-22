@@ -12,7 +12,7 @@ Final successfull pipeline deployment outcome:
 
 ## Features
 
-- 🎮 Fully functional Tic Tac Toe game
+- 🎮 Fully functional Grid Clash game
 - 📊 Score tracking for X, O, and draws
 - 📜 Game history with timestamps
 - 🏆 Highlights winning combinations
@@ -88,4 +88,6 @@ The game implements the following rules:
 
 
 4. Open your browser and navigate to `http://localhost:5173`
+
+![image](images/localhost.png)
 
