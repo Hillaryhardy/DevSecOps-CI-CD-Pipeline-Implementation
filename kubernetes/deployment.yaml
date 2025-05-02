@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tic-tac-toe
+  name: grid-clash
   labels:
-    app: tic-tac-toe
+    app: grid-clash
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: tic-tac-toe
+      app: grid-clash
   template:
     metadata:
       labels:
-        app: tic-tac-toe
+        app: grid-clash
     spec:
       containers:
-      - name: tic-tac-toe
+      - name: grid-clash
         image: ghcr.io/iam-veeramalla/devsecops-demo:sha-fb64dc2ac8cd8d79ad4a75c58326596b59eaf402
         # Image will be automatically updated by CI/CD pipeline
         imagePullPolicy: Always

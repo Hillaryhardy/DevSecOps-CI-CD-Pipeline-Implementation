@@ -1,6 +1,6 @@
 # GitHub Actions CI/CD Pipeline
 
-This directory contains the GitHub Actions workflow for the Tic Tac Game application's CI/CD pipeline.
+This directory contains the GitHub Actions workflow for the Grid Clash Game application's CI/CD pipeline.
 
 ## Pipeline Stages
 

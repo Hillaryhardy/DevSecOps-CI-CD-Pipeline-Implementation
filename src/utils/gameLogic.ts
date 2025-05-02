@@ -1,5 +1,5 @@
 /**
- * Calculate the winner of a tic-tac-toe game
+ * Calculate the winner of a grid-clash game
  * @param squares The current state of the board
  * @returns The winner and winning line, or null if no winner
  */
