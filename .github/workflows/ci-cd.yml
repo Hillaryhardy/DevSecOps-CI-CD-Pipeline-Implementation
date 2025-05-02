@@ -1,9 +1,10 @@
 name: CI/CD Pipeline
 
-# Grant the GITHUB_TOKEN permission to push to GHCR
+# Grant the GITHUB_TOKEN permission to push to your repository (contents: write)
 permissions:
-  contents: read        # needed by checkout
-  packages: write       # needed to push/pull container images
+  contents: write   # allow git push via GITHUB_TOKEN
+  packages: write   # allow pushing/pulling container images
+  actions: read     # default, only need to read actions metadata
 
 on:
   push:
@@ -20,16 +21,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
       - name: Install dependencies
         run: npm ci
-
       - name: Run tests
         run: npm test || echo "No tests found, would add tests in a real project"
 
@@ -39,16 +37,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
       - name: Install dependencies
         run: npm ci
-
       - name: Run ESLint
         run: npm run lint
 
@@ -59,19 +54,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
       - name: Install dependencies
         run: npm ci
-
       - name: Build project
         run: npm run build
-
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -132,7 +123,6 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          # still scanning by tag—remains lowercase
           image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:sha-${{ github.sha }}
           format: 'table'
           exit-code: '1'
@@ -161,6 +151,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          # ensure the GITHUB_TOKEN with write permission is used
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Git config
@@ -176,10 +167,7 @@ jobs:
         run: |
           REPO_LOWER=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
           NEW_IMAGE="${REGISTRY}/${REPO_LOWER}:${IMAGE_TAG}"
-
-          # Replace the image line
           sed -i "s|image: ${REGISTRY}/.*|image: ${NEW_IMAGE}|g" kubernetes/deployment.yaml
-
           echo "Updated deployment to use image: ${NEW_IMAGE}"
           grep -A 1 "image:" kubernetes/deployment.yaml
 
