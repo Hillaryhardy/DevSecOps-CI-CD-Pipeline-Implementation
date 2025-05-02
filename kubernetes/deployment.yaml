@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: grid-clash
-        image: ghcr.io/hillaryhardy/devsecops-ci-cd-pipeline-implementation:sha-2fefed59bd64f48e9525140a5dd693b665c2d0cd
+        image: ghcr.io/hillaryhardy/devsecops-ci-cd-pipeline-implementation:sha-9751025864db396dbc85881a9c67b9d01d403062
         # Image will be automatically updated by CI/CD pipeline
         imagePullPolicy: Always
         ports:
