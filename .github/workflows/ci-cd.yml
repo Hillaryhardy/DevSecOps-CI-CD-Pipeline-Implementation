@@ -1,5 +1,10 @@
 name: CI/CD Pipeline
 
+# Grant the GITHUB_TOKEN permission to push to GHCR
+permissions:
+  contents: read        # needed by checkout
+  packages: write       # needed to push/pull container images
+
 on:
   push:
     branches: [ main ]
@@ -103,7 +108,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata for Docker
         id: meta
@@ -127,6 +132,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
+          # still scanning by tag—remains lowercase
           image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:sha-${{ github.sha }}
           format: 'table'
           exit-code: '1'
@@ -155,7 +161,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Git config
         run: |
@@ -168,7 +174,6 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           REGISTRY: ghcr.io
         run: |
-          # Lowercase repo name for Kubernetes
           REPO_LOWER=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')
           NEW_IMAGE="${REGISTRY}/${REPO_LOWER}:${IMAGE_TAG}"
 
